@@ -39,9 +39,67 @@ Grasp 帮助建立初步整体理解，不承诺通过一篇导览或几道题�
 
 稳定基础知识可以直接解释。用户要求调研、最新信息、查阅具体来源，或关键事实不确定时，使用环境提供的检索能力查证。没有联网能力时，明确未核实的信息。模型更新频率不能保证具体事实的新鲜度。
 
-## 安装到 Codex
+## 安装
 
-克隆本仓库，然后将 `grasp/` 文件夹复制到个人 Skills 目录。默认位置为 `~/.codex/skills/`；设置了 `CODEX_HOME` 时使用其下的 `skills/`。
+### 直接告诉 Agent
+
+将下面这段话发给能够访问 GitHub 并安装本地 Skill 的 Agent：
+
+```text
+请从 https://github.com/Tsan1024/grasp-skill 安装 grasp，
+安装到当前 Agent 的个人范围。使用它支持的 Skill 安装器或目录，
+并确认安装后可以发现 grasp。
+```
+
+仅在一次对话里读取链接，不代表持久安装。没有文件操作或 Skill 安装能力的聊天界面，可能只能在当前对话中参考这些指令。
+
+### 使用 Skills CLI
+
+需要 Node.js/npm 和 Git。安装到个人范围，并选择目标 Agent：
+
+```bash
+npx skills add Tsan1024/grasp-skill --skill grasp -g
+```
+
+也可以明确指定目标：
+
+```bash
+# Codex
+npx skills add Tsan1024/grasp-skill --skill grasp -g -a codex
+
+# Claude Code
+npx skills add Tsan1024/grasp-skill --skill grasp -g -a claude-code
+```
+
+去掉 `-g` 为项目级安装；自动化场景可加 `-y` 接受安装提示。只查看仓库中的 Skill 而不安装：
+
+```bash
+npx skills add Tsan1024/grasp-skill --list
+```
+
+安装器负责处理不同 Agent 的目录。详见[安装器官方文档](https://github.com/vercel-labs/skills#install-a-skill)。
+
+### 兼容性与本地验证
+
+2026 年 9 月 5 日，在 macOS、Node.js 25.8.2、Skills CLI 1.5.23 上验证：
+
+| 目标 | 已验证的安装行为 |
+|---|---|
+| Codex | 项目级和个人级安装成功，安装内容与仓库一致。 |
+| Claude Code | 项目级安装生成了可访问 Skill 的链接。 |
+| Cursor、Gemini CLI、GitHub Copilot、OpenCode | 安装器选用共享的项目 Skill 目录，并写入一致的文件。 |
+| Windsurf | 安装器列有此目标，但本次多目标验证未生成预期目录，安装仍未验证。 |
+
+以上是文件安装验证，不代表逐个客户端完成了实际加载或教学效果测试。除 Codex 外，其他目标的个人级安装尚未测试。[安装器支持列表](https://github.com/vercel-labs/skills#supported-agents)中的其他 Agent 也可能适配，但本项目尚未验证。
+
+Grasp 使用基础 `SKILL.md` 指令，附可选的 Codex UI 元数据，不依赖额外运行服务或其他 Skill。
+
+### 手动备用方式
+
+<details>
+<summary>将 Skill 复制到 Agent 的技能目录</summary>
+
+克隆仓库后，将 `grasp/` 文件夹复制到客户端支持的个人或项目 Skill 目录。例如手动安装到 Codex 可使用 `~/.codex/skills/`，配置了 `CODEX_HOME` 时则使用其下的 `skills/`：
 
 ```bash
 git clone https://github.com/Tsan1024/grasp-skill.git
@@ -49,9 +107,15 @@ mkdir -p ~/.codex/skills
 cp -R grasp-skill/grasp ~/.codex/skills/
 ```
 
-复制前确认目标目录不存在，以免覆盖已有定制版本。让客户端重新加载 Skills；若当前会话未发现它，可新开会话后使用 `$grasp`。
+复制前确认目标没有已定制的 `grasp`，避免覆盖。其他客户端的目录不同，请遵循其文档。
 
-其他支持 `SKILL.md` 的客户端可按各自的安装方式使用 `grasp/`。本仓库包含 Codex UI 元数据，不依赖额外服务、脚本或其他 Skill。回答语言跟随用户。
+</details>
+
+## 调用 Grasp
+
+Codex 使用 `$grasp`，[Claude Code](https://code.claude.com/docs/en/skills) 使用 `/grasp`。其他客户端可通过 Skill 选择器，或直接说“用 grasp 帮我理解数据库”。显式调用语法由客户端决定。
+
+若未发现已安装的 Skill，重新加载 Skills 或新开会话。回答语言跟随用户。
 
 ## 文件结构
 
