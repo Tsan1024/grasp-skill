@@ -4,19 +4,71 @@ English | [简体中文](README.zh-CN.md)
 
 Build a clear mental map of an unfamiliar field, then check your understanding through focused questions.
 
-## Usage examples
+## Start here
+
+After installation, name the topic and say you are a beginner:
 
 ```text
-$grasp Help me understand Agent Memory in ten minutes. I'm a beginner—start with the big picture.
+$grasp Help me understand Agent Memory. I'm a beginner—start with the big picture.
+```
+
+No special configuration is needed. With no depth specified, Grasp starts with a short overview, then offers a core question to check understanding. Examples use Codex's `$grasp`; in Claude Code use `/grasp`. See [installation](#installation) if you have not installed it yet.
+
+## Choose your depth
+
+These are natural-language requests, not fixed command modes. Times describe approximate reading or study effort, not generation time or a promise of mastery. If you need the answer delivered within a deadline, say that separately.
+
+| What you need | What to ask for | What changes |
+|---|---|---|
+| A first look | A 5-minute version | The core problem, a small map, one example, and a few key ideas |
+| A quick overview (default) | A 5–15-minute version | Main relationships, essential mechanisms, and boundaries |
+| More explanation | A 30-minute version | More examples and comparisons of why different approaches exist |
+| A systematic map | About 1–3 hours of study material | Development, representative sources, assumptions, disagreements, and selective deeper reading |
+
+Copy any of these and replace the topic:
+
+```text
+$grasp Give me a 5-minute introduction to Agent Memory. Keep only the main ideas; skip the understanding check for now.
 ```
 
 ```text
-$grasp Help me understand linguistics from scratch. Start with the big picture.
+$grasp Give me a 30-minute guide to Agent Memory. Focus on why the main approaches exist and explain their differences with examples.
 ```
 
 ```text
-$grasp I just read an introduction to databases. Ask me a few core questions, one at a time, to check my understanding.
+$grasp Build a systematic map of Agent Memory with about two hours of study material. Include representative sources and separate essentials from optional details.
 ```
+
+## Check whether you understand
+
+The check is independent of the guide's length. Grasp normally starts with one question; answer in your own words and it will choose the next question based on your response. Expect roughly 3–5 exchanges covering purpose, relationships, and a simple new situation. You can stop or skip at any time.
+
+```text
+I have finished reading. Ask me one core question at a time to check whether I understand the main ideas. Give feedback after I answer.
+```
+
+If you already studied elsewhere:
+
+```text
+$grasp Check my understanding of databases. Here is what I have learned: [paste your notes or explanation].
+```
+
+The final feedback explains what your answers demonstrate and what is still uncertain. It does not certify expertise.
+
+## Continue without starting over
+
+Stay in the same conversation and say what you need:
+
+| Situation | Example follow-up |
+|---|---|
+| Too abstract | “Explain this with one everyday example and fewer terms.” |
+| A relationship is unclear | “Where does retrieval fit in the memory lifecycle?” |
+| Ready to go deeper | “Expand the update mechanism; keep the rest brief.” |
+| Want current developments | “Check recent sources and show what changes this map.” |
+| Want a saved note | “Save the map and the points I confused as Markdown.” |
+| A visual would help | “Create an HTML guide with a diagram and expandable details.” |
+
+For your first use, try a short overview, answer the core questions, then expand the one part that remains unclear. You do not need to specify every preference in the first prompt.
 
 ## What you get
 
