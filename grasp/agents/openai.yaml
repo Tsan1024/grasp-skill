@@ -1,0 +1,4 @@
+interface:
+  display_name: "Grasp · 抓住主脉"
+  short_description: "快速理解陌生领域的主脉与关系，再用几个核心问题检验理解"
+  default_prompt: "用 $grasp 帮我快速理解一个新领域，先讲清主脉，再逐个问我几个核心问题检验理解。"
